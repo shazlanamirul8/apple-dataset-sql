@@ -67,3 +67,8 @@ ORDER BY avg_discount DESC;
 ![discount](5.png)
 
 **Finding**: Product with consistently high discounts may indicate slow-moving inventory, end-of-cycle models, or agreesive promotional activity. This signals where pricing intervention or product refresh may be needed. Accoding to the screesnhot, maximum discount rate is 15% and average is less than 4%. This suggests that Apple maintains a disciplined pricing strategy with no significant promotional discounting in any single category.
+
+## 5. Which storage variant for each category sells the most units?
+**Business question**: Which storage configurations are customers choosing the most for each category, and what percentage of total sales does each represent?
+
+
