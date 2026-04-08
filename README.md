@@ -71,4 +71,29 @@ ORDER BY avg_discount DESC;
 ## 5. Which storage variant for each category sells the most units?
 **Business question**: Which storage configurations are customers choosing the most for each category, and what percentage of total sales does each represent?
 
+```
+SELECT  category, storage,
+        SUM(units_sold) AS total_units,
+        ROUND(SUM(units_sold) * 100 / (
+                SELECT SUM(units_sold)
+                FROM apple_sales b
+                WHERE b.category = a.category
+                AND storage != 'N/A'
+        ), 2) AS pct_within_category
+FROM apple_sales a
+WHERE storage != 'N/A'
+GROUP BY category, storage
+ORDER BY category, total_units
+```
+![storage](storage.png)
 
+**Finding**: Storage preferences differ meaningfully across product lines. iPhone buyers show the strongest price sensitivity, with demand spread across all tiers. iPad customers skew toward higher capacity, while Mac buyers consistently favour larger SSD configurations reflecting the more demanding use cases associated with desktop and laptop computing.
+
+**iPad** — customers prefer higher storage
+1TB leads at 18.52% — iPad customers tend to buy more storage, likely for content creation and media
+
+**iPhone** — 64GB and 256GB tied at top (20.89% each)
+Customers are split between the entry level and the mid-tier storage, suggesting price sensitivity plays a role
+
+**Mac** — 512GB SSD leads at 27%
+Mac customers lean toward higher storage, which makes sense as Macs are used for heavier workloads like video editing and development
